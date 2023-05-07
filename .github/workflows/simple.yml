@@ -29,7 +29,7 @@ jobs:
       #     entrypoint: '/bin/echo' 
       #     args: ${{ github.workspace }} 
           
-
+      - uses: actions/checkout@v2
       - name: Run Docker container
         run: |
           docker run -i --rm -v ${{ github.workspace }} pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "ls && cd workspace && ls"
