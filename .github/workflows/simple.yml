@@ -12,6 +12,8 @@ jobs:
   run-shell-commmand:
     # virtual machineの形式を指定
     runs-on: ubuntu-latest
+    container: #起動するコンテナイメージを指定
+      image: pinto0309/raspios_lite_armhf:2022-06-16_bullseye #指定のdockerイメージを使用
     # jobのステップ
     steps:
       # ステップ名
