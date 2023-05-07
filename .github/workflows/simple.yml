@@ -25,11 +25,9 @@ jobs:
       - name: Step with docker
         uses: docker://pinto0309/raspios_lite_armhf:2022-06-16_bullseye
         with:
-          entrypoint: '/bin/python3' #コンテナ起動時にechoコマンドを実行
-          args: '--version' #echoコマンドの引数
-          run: |
-            sudo apt-get update
-            uname -a
+          entrypoint: '/bin/echo' #コンテナ起動時にechoコマンドを実行
+          args: ${{ github.workspace }} #echoコマンドの引数
+          
 
       # - name: Run Docker container
       #   run: |
