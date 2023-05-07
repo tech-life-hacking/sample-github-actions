@@ -22,29 +22,7 @@ jobs:
         run: | # 複数のコマンドを記載したいときは|(パイプ)で繋ぐ
           node -v
           npm -v
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
+
 # 参考
 # https://docs.github.com/ja/actions/learn-github-actions/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows
  
