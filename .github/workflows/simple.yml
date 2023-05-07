@@ -12,15 +12,18 @@ jobs:
   run-shell-commmand:
     # virtual machineの形式を指定
     runs-on: ubuntu-latest
+    container:
+      image: multiarch/qemu-user-static
+      options: --rm --privileged --reset -p yes
     # jobのステップ
     steps:
       # ステップ名
       # - name: echo a string
       #   run: echo "Hello World"
       # ステップ2
-      - name: Set up QEMU
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      # - name: Set up QEMU
+      #   run: |
+      #     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
       - name: Run Docker container
         run: |
