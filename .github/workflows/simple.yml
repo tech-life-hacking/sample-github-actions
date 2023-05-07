@@ -28,6 +28,7 @@ jobs:
           entrypoint: '/bin/python3' #コンテナ起動時にechoコマンドを実行
           args: '--version' #echoコマンドの引数
           run: |
+            sudo apt-get update
             uname -a
 
       # - name: Run Docker container
