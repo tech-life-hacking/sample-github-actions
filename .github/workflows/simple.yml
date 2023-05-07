@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2021-03-04_buster
+          docker run --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye
       - name: multiline script
         run: | # 複数のコマンドを記載したいときは|(パイプ)で繋ぐ
           node -v
@@ -53,3 +53,6 @@ jobs:
               python3-pip \
               zip
           sudo apt-get clean
+          git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/
+          cd ./dlib
+          sudo python3 setup.py install --compiler-flags "-mfpu=neon"
