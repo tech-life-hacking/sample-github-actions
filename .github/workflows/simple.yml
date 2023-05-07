@@ -12,29 +12,27 @@ jobs:
   run-shell-commmand:
     # virtual machineの形式を指定
     runs-on: ubuntu-latest
-    container:
-      image: multiarch/qemu-user-static
-      options: --rm --privileged --reset -p yes
     # jobのステップ
     steps:
       # ステップ名
       # - name: echo a string
       #   run: echo "Hello World"
       # ステップ2
-      # - name: Set up QEMU
-      #   run: |
-      #     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - name: Set up QEMU
+        run: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
+      - uses: actions/checkout@v2
       - name: Run Docker container
         run: |
-          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "python3 --version"
-      - name: multiline script
-        run: | # 複数のコマンドを記載したいときは|(パイプ)で繋ぐ
-          node -v
-          npm -v
-          python3 --version
-          uname -a
-          free -h
+          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "./script.sh"
+      # - name: multiline script
+      #   run: | 
+      #     node -v
+      #     npm -v
+      #     python3 --version
+      #     uname -a
+      #     free -h
 
         # sudo apt-get update
           # sudo apt-get upgrade
