@@ -25,15 +25,14 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run Docker container
         run: |
-          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "./script.sh"
+          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash
+          node -v
+          npm -v
+          python3 --version
+          uname -a
+          free -h
       # - name: multiline script
       #   run: | 
-      #     node -v
-      #     npm -v
-      #     python3 --version
-      #     uname -a
-      #     free -h
-
         # sudo apt-get update
           # sudo apt-get upgrade
           # sudo apt-get install build-essential \
