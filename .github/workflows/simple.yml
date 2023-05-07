@@ -25,8 +25,8 @@ jobs:
       - name: Step with docker
         uses: docker://pinto0309/raspios_lite_armhf:2022-06-16_bullseye
         with:
-          entrypoint: '/bin/bash' #コンテナ起動時にechoコマンドを実行
-          args: 'uname -a' #echoコマンドの引数
+          entrypoint: '/bin/bash/uname' #コンテナ起動時にechoコマンドを実行
+          args: '-a' #echoコマンドの引数
 
       # - name: Run Docker container
       #   run: |
