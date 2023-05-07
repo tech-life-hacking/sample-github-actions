@@ -27,6 +27,8 @@ jobs:
         with:
           entrypoint: '/bin/python3' #コンテナ起動時にechoコマンドを実行
           args: '--version' #echoコマンドの引数
+          run: |
+            python3 --version
 
       # - name: Run Docker container
       #   run: |
