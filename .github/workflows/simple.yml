@@ -22,10 +22,9 @@ jobs:
         run: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
-      - uses: actions/checkout@v2
       - name: Run Docker container
         run: |
-          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash
+          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "git clone https://github.com/tech-life-hacking/sample-github-actions.git && cd sample-github-actions && ./script.sh"
           node -v
           npm -v
           python3 --version
