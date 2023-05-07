@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "ls"
+          docker run -i --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "python3 --version"
       - name: multiline script
         run: | # 複数のコマンドを記載したいときは|(パイプ)で繋ぐ
           node -v
