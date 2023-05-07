@@ -20,11 +20,11 @@ jobs:
       # ステップ2
       - name: Set up QEMU
         run: |
-          docker run --privileged multiarch/qemu-user-static --reset -p yes
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
       - name: Run Docker container
         run: |
-          docker run -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye
+          docker run --rm -v $PWD:/workspace pinto0309/raspios_lite_armhf:2022-06-16_bullseye bash
       - name: multiline script
         run: | # 複数のコマンドを記載したいときは|(パイプ)で繋ぐ
           node -v
