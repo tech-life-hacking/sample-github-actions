@@ -1,69 +1,29 @@
-# 参考
-# https://docs.github.com/ja/actions/learn-github-actions/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows
-
-# Workflow名
-name: Shell Commands
-# イベントトリガー
-# Git Pushした時にこのワークフローを実行する
+name: ci
 on: [push]
 
 jobs:
-  # job名(任意の名前で良い)
-  run-shell-commmand:
-    # virtual machineの形式を指定
+  docker:
     runs-on: ubuntu-latest
-    # jobのステップ
     steps:
-      # ステップ名
-      # - name: echo a string
-      #   run: echo "Hello World"
-      # ステップ2
-      - name: Set up QEMU
-        run: |
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-
-      # - name: Step with docker
-      #   uses: docker://pinto0309/raspios_lite_armhf:2022-06-16_bullseye
-      #   with:
-      #     options: -v ${{ github.workspace }}
-      #     entrypoint: '/bin/echo' 
-      #     args: ${{ github.workspace }} 
-          
-      - uses: actions/checkout@v2
-      - name: Run Docker container
-        run: |
-          docker run -i --rm -v ${{ github.workspace }} pinto0309/raspios_lite_armhf:2022-06-16_bullseye /bin/bash -c "ls && cd workspace && ls"
-        # node -v
-          # npm -v
-          # python3 --version
-          # uname -a
-          # free -h
-      # - name: multiline script
-      #   run: | 
-        # sudo apt-get update
-          # sudo apt-get upgrade
-          # sudo apt-get install build-essential \
-          #     cmake \
-          #     gfortran \
-          #     git \
-          #     wget \
-          #     curl \
-          #     graphicsmagick \
-          #     libgraphicsmagick1-dev \
-          #     libatlas-base-dev \
-          #     libavcodec-dev \
-          #     libavformat-dev \
-          #     libboost-all-dev \
-          #     libgtk2.0-dev \
-          #     libjpeg-dev \
-          #     liblapack-dev \
-          #     libswscale-dev \
-          #     pkg-config \
-          #     python3-dev \
-          #     python3-numpy \
-          #     python3-pip \
-          #     zip
-          # sudo apt-get clean
-          # git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/
-          # cd ./dlib
-          # sudo python3 setup.py install --compiler-flags "-mfpu=neon"
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: example/github-actions-test:latest
