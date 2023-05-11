@@ -26,4 +26,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: example/github-actions-test:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-test:latest
