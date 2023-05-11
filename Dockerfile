@@ -25,4 +25,8 @@ RUN apt install -y build-essential \
     zip
 RUN apt clean
 
-RUN pip3 install opencv-python
+RUN cd /home/pi
+RUN git clone https://github.com/tech-life-hacking/opencv_python_wheels.git
+RUN cd opencv_python_wheels
+RUN pip3 install opencv_python-4.7.0.72-cp39-cp39-linux_armv7l.whl
+
