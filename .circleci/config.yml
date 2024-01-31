@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable
-      auth:
+      - auth:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_TOKEN
     steps:
