@@ -1,31 +1,8 @@
 version: 2.1
-
-orbs:
-  docker: circleci/docker@1.7.0
-
 jobs:
-  build-and-push:
+  build:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.6
-          docker_layer_caching: true
-      - run: 
-          name: Install QEMU
-          command: apk add --no-cache qemu
-      - docker/check:
-          registry: docker.io
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_TOKEN
-      - docker/build:
-          image: $DOCKERHUB_USERNAME/face_recognition
-          tag: latest
-          push: true
-
-workflows:
-  build-and-push-workflow:
-    jobs:
-      - build-and-push:
-          context: dockerhub
+      - run: echo "hello world"
