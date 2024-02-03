@@ -5,4 +5,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run: echo "hello world"
+      - setup_remote_docker
+      - run:
+          name: Build image
+          command: docker build -t hoge/hoge-app .
