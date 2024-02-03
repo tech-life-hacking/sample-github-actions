@@ -1,11 +1,8 @@
 version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
+commands:
+  setup:
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Setup buildx and qemu
           command: |
@@ -13,5 +10,30 @@ jobs:
             sudo apt-get install -y qemu-user-static
             sudo apt-get install -y binfmt-support
       - run:
-          name: Build image
-          command: docker build -t hoge/hoge-app . --platform arm64
+          name: Check versions
+          command: |
+            qemu-aarch64-static --version
+            update-binfmts --version 
+      - run:
+          name: Create builder
+          command: |
+            export DOCKER_CLI_EXPERIMENTAL=enabled
+            docker buildx create --name arm-builder
+            docker buildx use arm-builder
+            docker buildx inspect --bootstrap
+jobs:
+  build:
+    machine:
+      image: 'ubuntu-2004:202010-01'
+    steps:
+      - setup
+      - run:
+          name: Build ARM docker
+          command: | 
+            DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --platform
+            linux/arm64 --load -t arm-image .
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
