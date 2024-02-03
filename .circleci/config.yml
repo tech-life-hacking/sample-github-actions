@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable
+      auth:
+        username: techlife
+        password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: echo "hello world"
