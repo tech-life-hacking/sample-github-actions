@@ -1,8 +1,18 @@
 version: 2.1
 jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
+  build-and-push:
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
-      - run: echo "hello world"
+      - docker/check
+      - docker/build:
+          # Docker HubのRepositoryを設定する
+          image: techlife/face_recognition
+　　　　　　# 未設定だとCircleCIがランダムな英数文字列を付与する
+          tag: latest
+      - docker/push:
+　　　　　　# Docker HubのRepositoryを設定する
+          image: techlife/face_recognition
+          # 未設定だとCircleCIがランダムな英数文字列を付与する
+          tag: latest
