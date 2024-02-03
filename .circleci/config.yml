@@ -7,12 +7,8 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          # Docker HubのRepositoryを設定する
           image: techlife/face_recognition
-　　　　　　# 未設定だとCircleCIがランダムな英数文字列を付与する
           tag: latest
       - docker/push:
-　　　　　　# Docker HubのRepositoryを設定する
           image: techlife/face_recognition
-          # 未設定だとCircleCIがランダムな英数文字列を付与する
           tag: latest
