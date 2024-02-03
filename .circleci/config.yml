@@ -1,4 +1,3 @@
-version: 2.1
 jobs:
   build-and-push:
     executor: docker/docker
@@ -12,3 +11,20 @@ jobs:
       - docker/push:
           image: techlife/face_recognition
           tag: latest
+
+orbs:
+  docker: circleci/docker@1.2.1
+
+version: 2.1
+workflows:
+  version: 2
+  build:
+    triggers:
+      - schedule:
+          cron: "0 4 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build-and-push
