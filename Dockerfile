@@ -25,10 +25,9 @@ RUN apt install -y build-essential \
     zip
 RUN apt clean
 RUN cd ~ && \
-    mkdir -p dlib && \
-    git clone -b 'v19.9' --single-branch https://github.com/davisking/dlib.git dlib/ && \
-    cd  dlib/ && \
-    python3 setup.py install --compiler-flags "-mfpu=neon"
+    git clone https://github.com/tech-life-hacking/sample-github-actions.git && \
+    cd sample-github-actions && \
+    pip3 install dlib-19.9.0-cp39-cp39-linux_armv7l.whl
 
 RUN cd ~ && \
     git clone https://github.com/tech-life-hacking/opencv_python_wheels.git && \
